@@ -4,6 +4,9 @@ import { Navigation } from 'react-native-navigation';
 import firebase from '../../firebase/firebase';
 
 const Spalsh = (props: any) => {
+
+
+  
   useEffect(() => {
     firebase.app;
     setTimeout(() => {

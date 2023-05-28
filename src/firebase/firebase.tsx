@@ -1,23 +1,21 @@
 import auth, { firebase } from '@react-native-firebase/auth';
 import { Navigation } from 'react-native-navigation';
 import { Alert } from 'react-native';
+import AsyncStorage from '../storage/AsyncStorage';
 
 
 const firebaseConfig = {
     apiKey: 'AIzaSyAGWMx9vKA0aek3n3qHmPq2kDNxh3pxkeE',
     authDomain: 'product-management-872e9',
-    databaseURL: 'YOUR_FIREBASE_DATABASE_URL',
     projectId: 'product-management-872e9',
     storageBucket: 'product-management-872e9.appspot.com',
-    messagingSenderId: 'YOUR_FIREBASE_MESSAGING_SENDER_ID',
     appId: '1:285652088799:android:09d1ecfdf6ac0ecfa3f66a',
-    measurementId: 'YOUR_FIREBASE_MEASUREMENT_ID',
 };
 
 const app = firebase.initializeApp(firebaseConfig);
 
 
-const signUpFirebase = (email: string, pass: string, name: string, surName: string, dob: string, phoneNumber: string) => {
+const signUpFirebase = (email: string, pass: string, name: string, surName: string, dob: string, phoneNumber: string, base64: string) => {
 
     auth()
         .createUserWithEmailAndPassword(email, pass)
@@ -25,6 +23,7 @@ const signUpFirebase = (email: string, pass: string, name: string, surName: stri
             console.log('User account created & signed in!');
             result.user.sendEmailVerification().then(() => {
                 console.log('sendEmailVerification');
+                AsyncStorage.storeData('user', { email, pass, name, surName, dob, phoneNumber, base64 })
                 Alert.alert('Alert', 'Please verify your email', [
                     {
                         text: 'OK', onPress: () => Navigation.setRoot({

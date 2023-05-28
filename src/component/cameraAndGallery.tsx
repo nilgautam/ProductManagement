@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Platform,
@@ -12,16 +12,16 @@ import {
 import customButton from './customButton';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {Navigation} from 'react-native-navigation';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {PERMISSIONS, request, openSettings} from 'react-native-permissions';
+import { Navigation } from 'react-native-navigation';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { PERMISSIONS, request, openSettings } from 'react-native-permissions';
 import CustomButton from './customButton';
 
 const CameraAndGallery = (props: any) => {
   const _openCamera = async () => {
     launchCamera({
       mediaType: 'mixed',
-
+      includeBase64: true,
       maxWidth: 500,
       maxHeight: 500,
     })
@@ -34,14 +34,15 @@ const CameraAndGallery = (props: any) => {
             path: result?.assets[0]?.uri,
             width: 500,
             height: 500,
+            includeBase64: true
           }).then(resultPicker => {
             if (resultPicker) {
               let data = {
                 isAvtar: false,
                 type: resultPicker?.mime,
-
                 url: resultPicker.path,
                 imageName: resultPicker.path,
+                base64: result?.data
               };
               return props?.propsData?.getImage(data);
             }
@@ -60,13 +61,14 @@ const CameraAndGallery = (props: any) => {
           //     }
         }
       })
-      .catch(err => {});
+      .catch(err => { });
 
     await _dismissModel();
   };
   const _openCameraFromPost = async () => {
     launchCamera({
       mediaType: 'mixed',
+      includeBase64: true,
     })
       .then((result: any) => {
         let pickImg = result?.assets[0];
@@ -79,12 +81,13 @@ const CameraAndGallery = (props: any) => {
             url: pickImg.uri,
             imageName: pickImg?.fileName,
             mime: pickImg?.type,
+            base64: result?.data
           };
           arr.push(data);
           return props?.propsData?.getImage(arr);
         }
       })
-      .catch(err => {});
+      .catch(err => { });
 
     await _dismissModel();
   };
@@ -95,6 +98,7 @@ const CameraAndGallery = (props: any) => {
       width: 500,
       height: 500,
       cropping: true,
+      includeBase64: true,
     });
     await _dismissModel();
     // let resultPicker = result?.assets[0]
@@ -105,6 +109,7 @@ const CameraAndGallery = (props: any) => {
         id: result.path,
         url: result.path,
         imageName: result.path,
+        base64: result?.data
       };
       return props?.propsData?.getImage(data);
     }
@@ -147,7 +152,7 @@ const CameraAndGallery = (props: any) => {
                   request(PERMISSIONS.ANDROID.CAMERA || PERMISSIONS.IOS.CAMERA);
                 }
               })
-              .catch(err => {});
+              .catch(err => { });
           }}
           image={require('../assets/images/camera.png')}
           text={'Take a photo'}
@@ -158,8 +163,8 @@ const CameraAndGallery = (props: any) => {
           onPress={() => {
             request(
               PERMISSIONS.ANDROID.READ_MEDIA_IMAGES ||
-                PERMISSIONS.ANDROID.READ_MEDIA_VIDEO ||
-                PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+              PERMISSIONS.ANDROID.READ_MEDIA_VIDEO ||
+              PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
             )
               .then(result => {
                 if (result == 'granted') {
@@ -173,11 +178,11 @@ const CameraAndGallery = (props: any) => {
                 } else {
                   request(
                     PERMISSIONS.ANDROID.READ_MEDIA_IMAGES ||
-                      PERMISSIONS.ANDROID.READ_MEDIA_VIDEO,
+                    PERMISSIONS.ANDROID.READ_MEDIA_VIDEO,
                   );
                 }
               })
-              .catch(err => {});
+              .catch(err => { });
           }}
           image={require('../assets/images/photo-gallery.png')}
           text={'Upload from Gallery'}
@@ -186,8 +191,8 @@ const CameraAndGallery = (props: any) => {
         />
 
         <Pressable
-          style={{position: 'absolute', right: 15, top: 15}}
-          onPress={() => {}}>
+          style={{ position: 'absolute', right: 15, top: 15 }}
+          onPress={() => { }}>
           <Image
             source={require('../assets/images/close.png')}
             style={{

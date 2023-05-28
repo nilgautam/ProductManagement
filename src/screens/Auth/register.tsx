@@ -20,7 +20,7 @@ const register = (props: any) => {
   const [dob, setDob] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [image, setImage] = useState();
-  const getImage = item => {
+  const getImage = (item: React.SetStateAction<undefined>) => {
     console.log('Hello Item', item);
     setImage(item);
   };
@@ -126,7 +126,7 @@ const register = (props: any) => {
           setPassword(val);
         }}
       />
-      <CustomButton text="Continue" onPress={() => {firebase.signUpFirebase(email,password,name,surName,dob,phoneNumber)}} />
+      <CustomButton text="Continue" onPress={() => {firebase.signUpFirebase(email,password,name,surName,dob,phoneNumber,image.base64)}} />
     </BaseSafeArea>
   );
 };
