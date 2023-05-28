@@ -179,7 +179,7 @@ const CameraAndGallery = (props: any) => {
               })
               .catch(err => {});
           }}
-          image={require('../assets/images/camera.png')}
+          image={require('../assets/images/photo-gallery.png')}
           text={'Upload from Gallery'}
           imageHeight={25}
           imageWidth={25}

@@ -5,12 +5,14 @@ import Spalsh from './src/screens/spalsh/spalsh';
 import login from './src/screens/Auth/login';
 import register from './src/screens/Auth/register';
 import CameraAndGallery from './src/component/cameraAndGallery';
+import setPassword from './src/screens/Auth/setPassword';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Splash', () => Spalsh);
 Navigation.registerComponent('login', () => login);
 Navigation.registerComponent('register', () => register);
 Navigation.registerComponent('CameraAndGallery', () => CameraAndGallery);
+Navigation.registerComponent('setPassword', () => setPassword);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
