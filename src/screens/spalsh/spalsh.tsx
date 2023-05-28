@@ -1,16 +1,13 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
-import { Navigation } from 'react-native-navigation';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Navigation} from 'react-native-navigation';
 import firebase from '../../firebase/firebase';
 
 const Spalsh = (props: any) => {
-
-
-  
   useEffect(() => {
     firebase.app;
     setTimeout(() => {
-      Navigation.setRoot({ root: { component: { name: 'register' } } })
+      Navigation.setRoot({root: {component: {name: 'register'}}});
     }, 1000);
   }, []);
 

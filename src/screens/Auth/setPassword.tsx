@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import {Navigation} from 'react-native-navigation';
 import CustomTextInput from '../../component/customeTextInput';
@@ -9,6 +9,9 @@ import CustomButton from '../../component/customButton';
 const setPassword = (props: any) => {
   const [password, setPassword] = useState('');
   const [repassword, setRePassword] = useState('');
+  useEffect(() => {
+    console.log('Props', props);
+  }, [props]);
   return (
     <BaseSafeArea componentId={props.componentId} title="">
       <CustomTextInput

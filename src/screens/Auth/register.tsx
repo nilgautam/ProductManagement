@@ -10,6 +10,7 @@ import CustomTextInput from '../../component/customeTextInput';
 import PhoneInput from 'react-native-phone-number-input';
 import CustomButton from '../../component/customButton';
 import firebase from '../../firebase/firebase';
+import ShowError from '../../component/showError';
 
 const register = (props: any) => {
   const phoneInput = useRef(null);
@@ -20,11 +21,39 @@ const register = (props: any) => {
   const [dob, setDob] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [image, setImage] = useState();
+  const [error, setError] = useState('');
   const getImage = (item: React.SetStateAction<undefined>) => {
     console.log('Hello Item', item);
     setImage(item);
+    setError('');
   };
-  
+  const onContinue = () => {
+    if (
+      image == undefined ||
+      name == '' ||
+      surName == '' ||
+      email == '' ||
+      phoneNumber == '' ||
+      dob == ''
+    ) {
+      setError('All field are require to fill');
+    } else {
+      let data = {
+        image: image,
+        name: name,
+        surName: surName,
+        email: email,
+        phoneNumber: phoneNumber,
+        dob: dob,
+      };
+      Navigation.push(props.componentId, {
+        component: {
+          name: 'setPassword',
+          passProps: {data},
+        },
+      });
+    }
+  };
   return (
     <BaseSafeArea
       componentId={props.componentId}
@@ -45,38 +74,33 @@ const register = (props: any) => {
           let propsData = {
             getImage: getImage,
           };
-      Navigation.showModal({
-        stack: {
-          children: [
-            {
-              component: {
-                id: 'CameraAndGallery',
-                name: 'CameraAndGallery',
+          Navigation.showModal({
+            stack: {
+              children: [
+                {
+                  component: {
+                    id: 'CameraAndGallery',
+                    name: 'CameraAndGallery',
                     passProps: {propsData},
-                options: {
-                  overlay: {
-                    interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
+                    options: {
+                      overlay: {
+                        interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
+                      },
+                      modalPresentationStyle:
+                        OptionsModalPresentationStyle.overCurrentContext,
+                      // screenBackgroundColor: 'red',
+
+                      layout: {
+                        backgroundColor: '#25222238',
+                        componentBackgroundColor: '#25222238',
+                        orientation: ['portrait'],
+                      },
+                    },
                   },
-                  modalPresentationStyle:
-                    OptionsModalPresentationStyle.overCurrentContext,
-                  // screenBackgroundColor: 'red',
-  
-                  layout: {
-                    backgroundColor: '#25222238',
-                    componentBackgroundColor: '#25222238',
-                    orientation: ['portrait'],
-                  },
-                  // topBar: {
-                  //     title: {
-                  //         text: '',
-                  //     },
-                  // },
                 },
-              },
+              ],
             },
-          ],
-        },
-      });
+          });
         }}
       />
       <CustomTextInput
@@ -84,6 +108,7 @@ const register = (props: any) => {
         value={name}
         onChange={val => {
           setName(val);
+          setError('');
         }}
       />
       <CustomTextInput
@@ -91,6 +116,7 @@ const register = (props: any) => {
         value={surName}
         onChange={val => {
           setSurName(val);
+          setError('');
         }}
       />
       <CustomTextInput
@@ -98,9 +124,11 @@ const register = (props: any) => {
         value={email}
         onChange={val => {
           setEmail(val);
+          setError('');
         }}
       />
       <PhoneInput
+      
         ref={phoneInput}
         defaultValue={phoneNumber}
         defaultCode="IN"
@@ -109,6 +137,7 @@ const register = (props: any) => {
         textContainerStyle={styles.textInput}
         onChangeFormattedText={text => {
           setPhoneNumber(text);
+          setError('');
         }}
       />
       <CustomTextInput
@@ -116,17 +145,27 @@ const register = (props: any) => {
         value={dob}
         onChange={val => {
           setDob(val);
+          setError('');
         }}
       />
+      <ShowError errorMessage={error} />
 
-      <CustomTextInput
-        title="Password"
-        value={password}
-        onChange={val => {
-          setPassword(val);
-        }}
-      />
-      <CustomButton text="Continue" onPress={() => {firebase.signUpFirebase(email,password,name,surName,dob,phoneNumber,image.base64)}} />
+      <View style={{flex: 1, justifyContent: 'flex-end'}}>
+        <CustomButton
+          text="Continue"
+          onPress={() => {
+            onContinue();
+            //   firebase.signUpFirebase(
+            //     email,
+            //     password,
+            //     name,
+            //     surName,
+            //     dob,
+            //     phoneNumber,
+            //   );
+          }}
+        />
+      </View>
     </BaseSafeArea>
   );
 };
