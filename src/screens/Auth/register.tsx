@@ -6,6 +6,7 @@ import AddUserProfile from '../../component/addUserProfile';
 import CustomTextInput from '../../component/customeTextInput';
 import PhoneInput from 'react-native-phone-number-input';
 import CustomButton from '../../component/customButton';
+import firebase from '../../firebase/firebase';
 
 const register = (props: any) => {
   const phoneInput = useRef(null);
@@ -24,6 +25,7 @@ const register = (props: any) => {
       componentId={props.componentId}
       linkText="Login"
       title=""
+      isScroll
       normalText="Already have an account?"
       onLinkPress={() => {
         Navigation.push(props.componentId, {
@@ -118,7 +120,7 @@ const register = (props: any) => {
           setPassword(val);
         }}
       />
-      <CustomButton text="Continue" onPress={() => {}} />
+      <CustomButton text="Continue" onPress={() => {firebase.signUpFirebase(email,password,name,surName,dob,phoneNumber)}} />
     </BaseSafeArea>
   );
 };
