@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285652088799",
+    "project_id": "product-management-872e9",
+    "storage_bucket": "product-management-872e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285652088799:android:09d1ecfdf6ac0ecfa3f66a",
+        "android_client_info": {
+          "package_name": "com.productmanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGWMx9vKA0aek3n3qHmPq2kDNxh3pxkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
