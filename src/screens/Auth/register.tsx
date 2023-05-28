@@ -1,6 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useRef} from 'react';
-import {Navigation, OptionsModalPresentationStyle} from 'react-native-navigation';
+import {
+  Navigation,
+  OptionsModalPresentationStyle,
+} from 'react-native-navigation';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import AddUserProfile from '../../component/addUserProfile';
 import CustomTextInput from '../../component/customeTextInput';
@@ -16,10 +19,11 @@ const register = (props: any) => {
   const [surName, setSurName] = useState('');
   const [dob, setDob] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const getImage = (item)=>{
-    console.log("Hello Item",item);
-    
-  }
+  const [image, setImage] = useState();
+  const getImage = item => {
+    console.log('Hello Item', item);
+    setImage(item);
+  };
   return (
     <BaseSafeArea
       componentId={props.componentId}
@@ -34,44 +38,46 @@ const register = (props: any) => {
           },
         });
       }}>
-      <AddUserProfile onPress={() => {
-        let propsData ={
-            getImage:getImage
-        }
-      Navigation.showModal({
-        stack: {
-          children: [
-            {
-              component: {
-                id: 'CameraAndGallery',
-                name: 'CameraAndGallery',
-                passProps: { propsData },
-                options: {
-                  overlay: {
-                    interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
-                  },
-                  modalPresentationStyle:
-                    OptionsModalPresentationStyle.overCurrentContext,
-                  // screenBackgroundColor: 'red',
-  
-                  layout: {
-                    backgroundColor: '#25222238',
-                    componentBackgroundColor: '#25222238',
-                    orientation: ['portrait'],
-                  },
-                  // topBar: {
-                  //     title: {
-                  //         text: '',
-                  //     },
-                  // },
-                },
-              },
-            },
-          ],
-        },
-      });
+      <AddUserProfile
+        image={{uri: image?.url}}
+        onPress={() => {
+          let propsData = {
+            getImage: getImage,
+          };
+          Navigation.showModal({
+            stack: {
+              children: [
+                {
+                  component: {
+                    id: 'CameraAndGallery',
+                    name: 'CameraAndGallery',
+                    passProps: {propsData},
+                    options: {
+                      overlay: {
+                        interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
+                      },
+                      modalPresentationStyle:
+                        OptionsModalPresentationStyle.overCurrentContext,
+                      // screenBackgroundColor: 'red',
 
-      }} />
+                      layout: {
+                        backgroundColor: '#25222238',
+                        componentBackgroundColor: '#25222238',
+                        orientation: ['portrait'],
+                      },
+                      // topBar: {
+                      //     title: {
+                      //         text: '',
+                      //     },
+                      // },
+                    },
+                  },
+                },
+              ],
+            },
+          });
+        }}
+      />
       <CustomTextInput
         title="Name"
         value={name}
@@ -98,7 +104,6 @@ const register = (props: any) => {
         defaultValue={phoneNumber}
         defaultCode="IN"
         layout="first"
-        
         containerStyle={styles.phoneContainer}
         textContainerStyle={styles.textInput}
         onChangeFormattedText={text => {
