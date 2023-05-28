@@ -24,6 +24,7 @@ const register = (props: any) => {
     console.log('Hello Item', item);
     setImage(item);
   };
+  
   return (
     <BaseSafeArea
       componentId={props.componentId}
