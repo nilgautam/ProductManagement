@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   tvBackTitle: {
     fontSize: 14,
-    color: 'white',
+    color: '#0bbd7d',
     marginEnd: 7,
     textDecorationLine: 'underline',
     textDecorationColor: 'red',
@@ -24,10 +24,11 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   titleView: {
-    justifyContent: 'space-between',
+    
     alignItems: 'center',
     flexDirection: 'row',
     flex: 1,
+
   },
   rightIconView: {
     flex: 1,

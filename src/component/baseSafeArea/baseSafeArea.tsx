@@ -1,7 +1,4 @@
-
-import AppBar from '../appBar/appBar'; 
-
-
+import AppBar from '../appBar/appBar';
 
 import React from 'react';
 import {
@@ -12,6 +9,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import LinkText from '../linkText';
 
 export interface Props {
   children?: React.ReactNode;
@@ -57,6 +55,9 @@ export interface Props {
   dividerMarginTop?: number;
   notificationImgmarginLeft?: number;
   viewBackroundColor?: string;
+  normalText?: string;
+  linkText?: string;
+  onLinkPress?: () => void;
 }
 
 const BaseSafeArea: React.FC<Props> = props => {
@@ -103,6 +104,9 @@ const BaseSafeArea: React.FC<Props> = props => {
     notificationImgmarginLeft,
     sideMenuBackgroundColor,
     viewBackroundColor,
+    normalText,
+    linkText,
+    onLinkPress,
   } = props;
 
   const _scrollRender = () => {
@@ -130,7 +134,7 @@ const BaseSafeArea: React.FC<Props> = props => {
       <View
         style={{
           flex: 1,
-          paddingHorizontal:10,
+          paddingHorizontal: 10,
           backgroundColor: viewBackroundColor,
         }}>
         {props.children}
@@ -178,7 +182,6 @@ const BaseSafeArea: React.FC<Props> = props => {
           rightIconPress={rightIconPress}
           centerIcon={centerIcon}
           prevScreenName={prevScreenName}
-         
           rightTitle={rightTitle}
           backArrowColor={leftIconTintColor}
           tintColor={tintColor}
@@ -199,9 +202,12 @@ const BaseSafeArea: React.FC<Props> = props => {
           containerMarginLeft={containerMarginLeft}
           onClickNotification={onClickNotification}
           notificationImgmarginLeft={notificationImgmarginLeft}
+          linkText={linkText}
+          normalText={normalText}
+          onLinkPress={onLinkPress}
         />
       )}
-   
+
       {_scrollRender()}
       {/* {sourceBg ? _bgImage() : _scrollRender()} */}
       {/* </SideMenuView> */}

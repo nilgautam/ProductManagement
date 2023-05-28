@@ -7,7 +7,7 @@ const Spalsh = (props: any) => {
     setTimeout(() => {
       Navigation.push(props.componentId, {
         component: {
-          name: 'login',
+          name: 'register',
         },
       });
     }, 1000);

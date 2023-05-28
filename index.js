@@ -1,32 +1,32 @@
-import { Navigation } from "react-native-navigation";
+import {Navigation} from 'react-native-navigation';
 
-import App from "./App";
-import Spalsh from "./src/screens/spalsh/spalsh";
-import login from "./src/screens/Auth/login";
-
-
+import App from './App';
+import Spalsh from './src/screens/spalsh/spalsh';
+import login from './src/screens/Auth/login';
+import register from './src/screens/Auth/register';
+import CameraAndGallery from './src/component/cameraAndGallery';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Splash', () => Spalsh);
 Navigation.registerComponent('login', () => login);
+Navigation.registerComponent('register', () => register);
+Navigation.registerComponent('CameraAndGallery', () => CameraAndGallery);
 
 Navigation.events().registerAppLaunchedListener(() => {
-   Navigation.setRoot({
-     root: {
-       stack: {
-         children: [
-           {
-             component: {
-               name: 'Splash'
-             },
-             
-           }
-         ]
-       }
-     }
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'Splash',
+            },
+          },
+        ],
+      },
+    },
   });
 });
-
 
 Navigation.setDefaultOptions({
   layout: {
