@@ -44,38 +44,38 @@ const register = (props: any) => {
           let propsData = {
             getImage: getImage,
           };
-          Navigation.showModal({
-            stack: {
-              children: [
-                {
-                  component: {
-                    id: 'CameraAndGallery',
-                    name: 'CameraAndGallery',
+      Navigation.showModal({
+        stack: {
+          children: [
+            {
+              component: {
+                id: 'CameraAndGallery',
+                name: 'CameraAndGallery',
                     passProps: {propsData},
-                    options: {
-                      overlay: {
-                        interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
-                      },
-                      modalPresentationStyle:
-                        OptionsModalPresentationStyle.overCurrentContext,
-                      // screenBackgroundColor: 'red',
-
-                      layout: {
-                        backgroundColor: '#25222238',
-                        componentBackgroundColor: '#25222238',
-                        orientation: ['portrait'],
-                      },
-                      // topBar: {
-                      //     title: {
-                      //         text: '',
-                      //     },
-                      // },
-                    },
+                options: {
+                  overlay: {
+                    interceptTouchOutside: true, // this make touch events pass through the invisible parts of the overlay
                   },
+                  modalPresentationStyle:
+                    OptionsModalPresentationStyle.overCurrentContext,
+                  // screenBackgroundColor: 'red',
+  
+                  layout: {
+                    backgroundColor: '#25222238',
+                    componentBackgroundColor: '#25222238',
+                    orientation: ['portrait'],
+                  },
+                  // topBar: {
+                  //     title: {
+                  //         text: '',
+                  //     },
+                  // },
                 },
-              ],
+              },
             },
-          });
+          ],
+        },
+      });
         }}
       />
       <CustomTextInput
