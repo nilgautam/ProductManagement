@@ -4,18 +4,19 @@ interface Props {
   title: string;
   value: string;
   onChange: (value: any) => void;
-  placeHolder: string;
+  marginTop?: any;
 }
 const CustomTextInput: React.FC<Props> = (props: any) => {
-  let {title, value, onChange, placeHolder} = props;
+  let {title, value, onChange, marginTop} = props;
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, {marginTop: marginTop ?? 20}]}>
       {value !== '' && <Text style={styles.title}>{title}</Text>}
-      <TextInput 
-      {...props}
-      
-      value={value} placeholder={title} onChange={onChange} 
-      
+      <TextInput
+        {...props}
+        value={value}
+        placeholder={title}
+        onChangeText={onChange}
+
       />
     </View>
   );
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: 60,
     borderWidth: 1,
-    borderColor: '#757b79',
+    borderColor: '#DFDFDF',
     width: '100%',
     borderRadius: 8,
     justifyContent: 'center',

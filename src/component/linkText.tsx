@@ -4,12 +4,19 @@ interface Props {
   normalText?: string;
   linkText: string;
   onPress: () => void;
+  normalTextColor?: string;
+  marginTop?: number;
 }
 const LinkText: React.FC<Props> = (props: any) => {
-  let {normalText, linkText, onPress} = props;
+  let {normalText, linkText, onPress, normalTextColor, marginTop} = props;
   return (
-    <View>
-      {normalText && <Text style={styles.normalText}>{normalText}</Text>}
+    <View style={{alignItems: 'center', marginTop: marginTop}}>
+      {normalText && (
+        <Text
+          style={[styles.normalText, {color: normalTextColor ?? '#757b79'}]}>
+          {normalText}
+        </Text>
+      )}
       <Text onPress={onPress} style={styles.linkText}>
         {linkText}
       </Text>
@@ -22,7 +29,7 @@ export default LinkText;
 const styles = StyleSheet.create({
   normalText: {
     fontSize: 12,
-    color: '#757b79',
+
     fontWeight: '400',
   },
   linkText: {

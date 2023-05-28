@@ -46,6 +46,9 @@ export interface Props {
   onClickNotification?: () => void;
   notificationImgmarginLeft?: number;
   isHideLeft?: number;
+  normalText?: string;
+  linkText?: string;
+  onLinkPress?: () => void;
 }
 const AppBar: React.FC<Props> = (props: any) => {
   let {
@@ -82,6 +85,9 @@ const AppBar: React.FC<Props> = (props: any) => {
     onClickNotification,
     notificationImgmarginLeft,
     isHideLeft,
+    normalText,
+    linkText,
+    onLinkPress,
   } = props;
   return (
     <View style={[styles.container, {backgroundColor: backgroundColor}]}>
@@ -104,7 +110,11 @@ const AppBar: React.FC<Props> = (props: any) => {
         </Pressable>
       )}
 
-      <View style={styles.titleView}>
+      <View
+        style={[
+          styles.titleView,
+          {justifyContent: title ? 'space-between' : 'flex-end'},
+        ]}>
         {title && (
           <Pressable style={{right: isHideLeft}} onPress={titlePress}>
             <Text
@@ -121,7 +131,7 @@ const AppBar: React.FC<Props> = (props: any) => {
           </Pressable>
         )}
 
-        {containerView && (
+        {linkText && (
           <View
             style={{
               marginLeft: containerMarginLeft ?? 0,
@@ -129,9 +139,9 @@ const AppBar: React.FC<Props> = (props: any) => {
               alignSelf: 'flex-end',
             }}>
             <LinkText
-              linkText="Sign Up"
-              onPress={() => {}}
-              normalText="Not a member?"
+              linkText={linkText}
+              onPress={onLinkPress}
+              normalText={normalText}
             />
           </View>
         )}
