@@ -28,6 +28,7 @@ const register = (props: any) => {
     setError('');
   };
   const onContinue = () => {
+    console.log('Hello Comp');
     if (
       image == undefined ||
       name == '' ||
@@ -38,14 +39,16 @@ const register = (props: any) => {
     ) {
       setError('All field are require to fill');
     } else {
+      console.log('Hello Comp', props.componentId);
       let data = {
-        image: image,
+        image: 'fdg',
         name: name,
         surName: surName,
         email: email,
         phoneNumber: phoneNumber,
         dob: dob,
       };
+
       Navigation.push(props.componentId, {
         component: {
           name: 'setPassword',
@@ -128,7 +131,6 @@ const register = (props: any) => {
         }}
       />
       <PhoneInput
-      
         ref={phoneInput}
         defaultValue={phoneNumber}
         defaultCode="IN"
@@ -154,6 +156,7 @@ const register = (props: any) => {
         <CustomButton
           text="Continue"
           onPress={() => {
+            console.log('hrllloooo');
             onContinue();
             //   firebase.signUpFirebase(
             //     email,

@@ -13,10 +13,11 @@ interface Props {
   marginLeft?: number;
   imageTitle?: string;
   marginTop?: number;
+  fromProduct?: boolean;
 }
 
 const AddUserProfile: React.FC<Props> = (props: any) => {
-  let {onPress, image, marginLeft, imageTitle, marginTop} = props;
+  let {onPress, image, marginLeft, imageTitle, marginTop, fromProduct} = props;
 
   return (
     <View
@@ -32,7 +33,11 @@ const AddUserProfile: React.FC<Props> = (props: any) => {
         {!image?.uri ? (
           <>
             <Image
-              source={require('../assets/images/user.png')}
+              source={
+                fromProduct
+                  ? require('../assets/images/best-product.png')
+                  : require('../assets/images/user.png')
+              }
               style={styles.userImage}
               resizeMode="contain"
             />

@@ -65,7 +65,7 @@ const CustomButton: React.FC<Props> = props => {
 
   return (
     <Pressable
-      onPress={() => !isLoading && !disable && onPress()}
+      onPress={() => onPress()}
       style={[
         styles.buttonView,
         {

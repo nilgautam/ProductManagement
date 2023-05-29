@@ -7,11 +7,13 @@ import register from './src/screens/Auth/register';
 import CameraAndGallery from './src/component/cameraAndGallery';
 import setPassword from './src/screens/Auth/setPassword';
 import Home from './src/screens/home/Home';
-import addProduct from './src/screens/home/addProduct';
-import configureStore from './src/redux/store';
+import AddProduct from './src/screens/home/addProduct';
+
 import {Provider} from 'react-redux';
-import itemReducer from './src/redux/reducers';
+
 import profile from './src/screens/home/profile';
+import store from './src/redux/store';
+import ProductList from './src/screens/home/productList';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Splash', () => Spalsh);
@@ -23,14 +25,24 @@ Navigation.registerComponent('Home', () => Home);
 Navigation.registerComponent('profile', () => profile);
 
 Navigation.registerComponent(
-  'addProduct',
+  'AddProduct',
   () => props =>
     (
       <Provider store={store}>
-        <addProduct {...props} />
+        <AddProduct {...props} />
       </Provider>
     ),
-  () => addProduct,
+  () => AddProduct,
+);
+Navigation.registerComponent(
+  'ProductList',
+  () => props =>
+    (
+      <Provider store={store}>
+        <ProductList {...props} />
+      </Provider>
+    ),
+  () => ProductList,
 );
 
 Navigation.events().registerAppLaunchedListener(() => {

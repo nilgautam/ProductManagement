@@ -1,22 +1,30 @@
-import { ADD_ITEM } from "./action";
+// reducer.ts
+import {ActionTypes, AddItemAction} from './action';
 
-interface State {
-  items: string[];
+// Define the initial state
+export interface AppState {
+  items: string[]; // Update the type according to your needs
 }
-const initialState: State = {
+
+const initialState: AppState = {
   items: [],
 };
 
-const itemReducer = (state = initialState, action: any) => {
+// Define the reducer function
+const reducer = (state = initialState, action: AddItemAction): AppState => {
   switch (action.type) {
-    case ADD_ITEM:
+    case ActionTypes.ADD_ITEM:
+      console.log('stateee', state.items, action.payload.item);
+      var arr = state.items;
+      arr.push(action.payload.item);
+      console.log('new', arr);
       return {
         ...state,
-        items: [...state.items, action.payload],
+        items: arr,
       };
     default:
       return state;
   }
 };
 
-export default itemReducer;
+export default reducer;
