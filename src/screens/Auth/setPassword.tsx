@@ -48,14 +48,13 @@ const setPassword = (props: any) => {
               Alert.alert("Password Doesn't Match");
             } else {
               firebase.signUpFirebase(
-                props?.data?.image.base64,
                 props?.data?.email,
-                props?.data?.password,
+                password,
                 props?.data?.name,
                 props?.data?.surName,
                 props?.data?.dob,
                 props?.data?.phoneNumber,
-                password,
+                props?.data?.image.base64,
               );
             }
           }}

@@ -1,25 +1,31 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {Navigation} from 'react-native-navigation';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Navigation } from 'react-native-navigation';
 import firebase from '../../firebase/firebase';
+import AsyncStorage from '../../storage/AsyncStorage';
 
 const Spalsh = (props: any) => {
   useEffect(() => {
     firebase.app;
-    setTimeout(() => {
-      Navigation.setRoot({
-        root: {
-          stack: {
-            children: [
-              {
-                component: {
-                  name: 'login',
+    setTimeout(async () => {
+      const user = await AsyncStorage.getData('user')
+      if (user) {
+        firebase.rootHome()
+      } else {
+        Navigation.setRoot({
+          root: {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'login',
+                  },
                 },
-              },
-            ],
+              ],
+            },
           },
-        },
-      });
+        });
+      }
     }, 1000);
   }, []);
 
