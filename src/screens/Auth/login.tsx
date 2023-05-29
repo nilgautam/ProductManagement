@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import {Alert, Image, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import CustomTextInput from '../../component/customeTextInput';
 import LinkText from '../../component/linkText';
 import CustomButton from '../../component/customButton';
 import OR from '../../component/or';
-import { Navigation } from 'react-native-navigation';
+import {Navigation} from 'react-native-navigation';
 import firebase from '../../firebase/firebase';
 
 const login = (props: any) => {
@@ -47,15 +47,24 @@ const login = (props: any) => {
 
           marginTop: 10,
         }}>
-        <LinkText linkText="Forgot Password" onPress={() => { }} />
+        <LinkText linkText="Forgot Password" onPress={() => {}} />
       </View>
 
-      <CustomButton text="Log In" onPress={() => { firebase.loginFirebase(email, password) }} />
+      <CustomButton
+        text="Log In"
+        onPress={() => {
+          if (email == '' || password == '') {
+            Alert.alert('Please fill the both filed');
+          } else {
+            firebase.loginFirebase(email, password);
+          }
+        }}
+      />
       <OR />
 
       <CustomButton
         text="Sign In With Google"
-        onPress={() => { }}
+        onPress={() => {}}
         borderColor="#DFDFDF"
         buttonColor="white"
         textColor="black"
@@ -63,7 +72,7 @@ const login = (props: any) => {
       />
       <CustomButton
         text="Sign In With Facebook"
-        onPress={() => { }}
+        onPress={() => {}}
         borderColor="#DFDFDF"
         buttonColor="white"
         textColor="black"
@@ -71,12 +80,12 @@ const login = (props: any) => {
       />
 
       <View
-        style={{ alignItems: 'center', justifyContent: 'center', marginTop: 20 }}>
+        style={{alignItems: 'center', justifyContent: 'center', marginTop: 20}}>
         <Image
           source={require('../../assets/images/face-recognition.png')}
-          style={{ width: 50, height: 50, tintColor: 'gray' }}
+          style={{width: 50, height: 50, tintColor: 'gray'}}
         />
-        <Text style={{ color: 'black', marginTop: 10 }}>Face Id</Text>
+        <Text style={{color: 'black', marginTop: 10}}>Face Id</Text>
 
         <LinkText
           normalText="By continuing agree to our"

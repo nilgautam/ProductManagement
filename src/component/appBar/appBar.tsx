@@ -103,7 +103,6 @@ const AppBar: React.FC<Props> = (props: any) => {
             style={{
               height: leftIconHeight ?? 20,
               width: leftIconWidth ?? 20,
-              tintColor: '#0bbd7d',
             }}
           />
           <Text style={styles.tvBackTitle}>{prevScreenName ?? 'Back'}</Text>

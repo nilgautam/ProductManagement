@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import {Navigation} from 'react-native-navigation';
 import CustomTextInput from '../../component/customeTextInput';
 import LinkText from '../../component/linkText';
 import CustomButton from '../../component/customButton';
+import firebase from '../../firebase/firebase';
 
 const setPassword = (props: any) => {
   const [password, setPassword] = useState('');
@@ -40,7 +41,25 @@ const setPassword = (props: any) => {
             Login
           </Text>
         </Text>
-        <CustomButton text="Sign Up" onPress={() => {}} />
+        <CustomButton
+          text="Sign Up"
+          onPress={() => {
+            if (password !== repassword) {
+              Alert.alert("Password Doesn't Match");
+            } else {
+              firebase.signUpFirebase(
+                props?.data?.image.base64,
+                props?.data?.email,
+                props?.data?.password,
+                props?.data?.name,
+                props?.data?.surName,
+                props?.data?.dob,
+                props?.data?.phoneNumber,
+                password,
+              );
+            }
+          }}
+        />
       </View>
     </BaseSafeArea>
   );
