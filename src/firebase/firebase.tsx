@@ -86,31 +86,8 @@ const loginFirebase = (email: string, pass: string) => {
         // Navigation add according to need
         // Navigation.setRoot({ root: { component: { name: 'Home' } } })
 
-        Navigation.setRoot({
-          root: {
-            sideMenu: {
-              center: {
-                stack: {
-                  id: 'Home',
-                  children: [
-                    {
-                      component: {
-                        id: 'Home',
-                        name: 'Home',
-                      },
-                    },
-                  ],
-                },
-              },
-              left: {
-                component: {
-                  id: 'Drawer',
-                  name: 'Drawer',
-                },
-              },
-            },
-          },
-        });
+        rootHome;
+       
       } else {
         Alert.alert('Error!', 'Email not verified');
       }
@@ -146,4 +123,33 @@ const signOut = () => {
     });
 };
 
-export default {app, signUpFirebase, loginFirebase, signOut};
+
+const rootHome=()=>{
+    Navigation.setRoot({
+        root: {
+          sideMenu: {
+            center: {
+              stack: {
+                id: 'Home',
+                children: [
+                  {
+                    component: {
+                      id: 'Home',
+                      name: 'Home',
+                    },
+                  },
+                ],
+              },
+            },
+            left: {
+              component: {
+                id: 'Drawer',
+                name: 'Drawer',
+              },
+            },
+          },
+        },
+      });
+}
+
+export default {app, signUpFirebase, loginFirebase, signOut,rootHome};

@@ -25,7 +25,7 @@ const profile = (props: any) => {
     setImage(item);
   };
   useEffect(() => {
-    AsyncStorage.getData('userData')
+    AsyncStorage.getData('user')
       .then(data => {
         console.log('user data found', data);
         setName(data?.name);
@@ -44,7 +44,7 @@ const profile = (props: any) => {
     console.log('PHoneNumber', phoneNumber?.slice(0, 3), phoneInput);
   }, [phoneNumber]);
   return (
-    <BaseSafeArea componentId={props?.componentId} title="Profile">
+    <BaseSafeArea componentId={props?.componentId} title="Profile" isScroll>
       <AddUserProfile
         image={{uri: image?.url}}
         onPress={() => {
@@ -132,7 +132,7 @@ const profile = (props: any) => {
               phoneNumber: phoneNumber,
               dob: dob,
             };
-            AsyncStorage.storeData('userData', object);
+            AsyncStorage.storeData('user', object);
             //   firebase.signUpFirebase(
             //     email,
             //     password,
