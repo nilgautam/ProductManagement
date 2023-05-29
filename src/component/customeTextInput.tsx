@@ -1,25 +1,34 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
+
+
 interface Props {
   title: string;
   value: string;
   onChange: (value: any) => void;
   marginTop?: any;
-  keyboardType?:any
+  keyboardType?: any;
+  date?: any;
+  setDob?: (item: string) => void;
 }
 const CustomTextInput: React.FC<Props> = (props: any) => {
-  let {title, value, onChange, marginTop,keyboardType} = props;
+  let {title, value, onChange, marginTop, keyboardType, date, setDob} = props;
+  const [showPicker, setShowPicker] = useState(false);
+  const [dob, setDate] = useState(Date());
+  
+
+
   return (
-    <View style={[styles.mainContainer, {marginTop: marginTop ?? 20}]}>
+    <View style={[styles.mainContainer, {marginTop: marginTop ?? 20,}]}>
       {value !== '' && <Text style={styles.title}>{title}</Text>}
       <TextInput
         {...props}
-        keyboardType={keyboardType??'default'}
+        keyboardType={keyboardType ?? 'default'}
         value={value}
         placeholder={title}
         onChangeText={onChange}
-
       />
+    
     </View>
   );
 };

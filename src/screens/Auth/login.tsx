@@ -28,6 +28,7 @@ const login = (props: any) => {
       }}>
       <CustomTextInput
         title="Email"
+        keyboardType ={'email'}
         value={email}
         onChange={val => {
           setEmail(val);

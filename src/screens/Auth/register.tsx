@@ -124,6 +124,7 @@ const register = (props: any) => {
       />
       <CustomTextInput
         title="Email"
+        keyboardType={'email'}
         value={email}
         onChange={val => {
           setEmail(val);
@@ -145,6 +146,7 @@ const register = (props: any) => {
       <CustomTextInput
         title="Birth Date"
         value={dob}
+        keyboardType={'number-pad'}
         onChange={val => {
           setDob(val);
           setError('');
