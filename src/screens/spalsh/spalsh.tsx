@@ -7,7 +7,7 @@ const Spalsh = (props: any) => {
   useEffect(() => {
     firebase.app;
     setTimeout(() => {
-      Navigation.setRoot({root: {component: {name: 'register'}}});
+      Navigation.setRoot({root: {component: {name: 'login'}}});
     }, 1000);
   }, []);
 

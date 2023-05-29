@@ -12,6 +12,7 @@ import configureStore from './src/redux/store';
 import {Provider} from 'react-redux';
 import itemReducer from './src/redux/reducers';
 import profile from './src/screens/home/profile';
+import Drawer from './src/screens/home/Drawer';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Splash', () => Spalsh);
@@ -21,6 +22,7 @@ Navigation.registerComponent('CameraAndGallery', () => CameraAndGallery);
 Navigation.registerComponent('setPassword', () => setPassword);
 Navigation.registerComponent('Home', () => Home);
 Navigation.registerComponent('profile', () => profile);
+Navigation.registerComponent('Drawer', () => Drawer);
 
 Navigation.registerComponent(
   'addProduct',
