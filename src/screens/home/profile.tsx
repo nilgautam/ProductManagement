@@ -95,6 +95,7 @@ const profile = (props: any) => {
         }}
       />
       <CustomTextInput
+        keyboardType={'email'}
         title="Email"
         value={email}
         onChange={val => {
@@ -115,6 +116,7 @@ const profile = (props: any) => {
       <CustomTextInput
         title="Birth Date"
         value={dob}
+        keyboardType={'number-pad'}
         onChange={val => {
           setDob(val);
         }}
