@@ -63,7 +63,25 @@ const loginFirebase = (email: string, pass: string) => {
         console.log('User account Login');
         if (result?.user?.emailVerified) {
             // Navigation add according to need
-            Navigation.setRoot({ root: { component: { name: 'Home' } } })
+            // Navigation.setRoot({ root: { component: { name: 'Home' } } })
+
+            Navigation.setRoot({
+                root:{
+                    sideMenu: {
+                        center: {
+                          stack: {
+                            id: 'Home',
+                            children: []
+                          }
+                        },
+                        left: {
+                          component:{
+                            name:"Drawer"
+                          }
+                        }
+                      }
+                }
+            })
         } else {
             Alert.alert('Error!', 'Email not verified')
         }
