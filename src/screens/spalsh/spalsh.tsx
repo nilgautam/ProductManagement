@@ -7,7 +7,7 @@ const Spalsh = (props: any) => {
   useEffect(() => {
     firebase.app;
     setTimeout(() => {
-      Navigation.push(props.componentId, {component: {name: 'ProductList'}});
+      Navigation.push(props.componentId, {component: {name: 'profile'}});
     }, 1000);
   }, []);
 

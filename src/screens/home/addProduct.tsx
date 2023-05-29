@@ -10,6 +10,7 @@ import {
 } from 'react-native-navigation';
 import AddUserProfile from '../../component/addUserProfile';
 import {Switch, Text, View} from 'react-native';
+import ShowError from '../../component/showError';
 
 const AddProduct = (props: any) => {
   const [productName, setProductName] = useState('');
@@ -26,16 +27,33 @@ const AddProduct = (props: any) => {
     console.log('getItemReducer', getItemReducer);
   }, [getItemReducer]);
   const handleAddItem = () => {
-    var object = {
-      productImage: productImage,
-      productName: productName,
-      productDescription: productDescription,
-      price: price,
-      discountPrice: discountPrice,
-      status: status == true ? 'Active' : 'Inactive',
-    };
+    if (
+      productImage == undefined ||
+      productName == '' ||
+      productDescription == '' ||
+      price == '' ||
+      discountPrice == ''
+    ) {
+      setError('All field are require to fill');
+    } else {
+      var object = {
+        productImage: productImage,
+        productName: productName,
+        productDescription: productDescription,
+        price: price,
+        discountPrice: discountPrice,
+        status: status == true ? 'Active' : 'Inactive',
+      };
 
-    dispatch(addItem(object)); // Pass the item you want to add
+      dispatch(addItem(object));
+
+      Navigation.push(props.componentId, {
+        component: {
+          name: 'ProductList',
+        },
+      });
+    }
+    // Pass the item you want to add
   };
   const getImage = (item: React.SetStateAction<undefined>) => {
     console.log('Hello Item', item);
@@ -127,6 +145,7 @@ const AddProduct = (props: any) => {
           }}
         />
       </View>
+      <ShowError errorMessage={error} />
       <CustomButton text={'Add Item'} onPress={handleAddItem}>
         Add Item
       </CustomButton>

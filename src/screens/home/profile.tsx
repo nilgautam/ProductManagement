@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import CustomTextInput from '../../component/customeTextInput';
 import CustomButton from '../../component/customButton';
@@ -9,6 +9,7 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
+import AsyncStorage from '../../storage/AsyncStorage';
 
 const profile = (props: any) => {
   const phoneInput = useRef(null);
@@ -23,6 +24,25 @@ const profile = (props: any) => {
     console.log('Hello Item', item);
     setImage(item);
   };
+  useEffect(() => {
+    AsyncStorage.getData('userData')
+      .then(data => {
+        console.log('user data found', data);
+        setName(data?.name);
+        setSurName(data?.surName);
+        setDob(data?.dob);
+        setPhoneNumber(data?.phoneNumber);
+        phoneInput.current.state.number = data?.phoneNumber?.slice(4);
+        setEmail(data?.email);
+        setImage(data?.profile);
+      })
+      .catch(err => {
+        console.log('errorrrr', err);
+      });
+  }, []);
+  useEffect(() => {
+    console.log('PHoneNumber', phoneNumber?.slice(0, 3), phoneInput);
+  }, [phoneNumber]);
   return (
     <BaseSafeArea componentId={props?.componentId} title="Profile">
       <AddUserProfile
@@ -104,6 +124,15 @@ const profile = (props: any) => {
         <CustomButton
           text="Continue"
           onPress={() => {
+            var object = {
+              profile: image,
+              name: name,
+              surName: surName,
+              email: email,
+              phoneNumber: phoneNumber,
+              dob: dob,
+            };
+            AsyncStorage.storeData('userData', object);
             //   firebase.signUpFirebase(
             //     email,
             //     password,
