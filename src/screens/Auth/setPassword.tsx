@@ -54,7 +54,7 @@ const setPassword = (props: any) => {
                 props?.data?.surName,
                 props?.data?.dob,
                 props?.data?.phoneNumber,
-                props?.data?.image.base64,
+                props?.data?.image,
               );
             }
           }}

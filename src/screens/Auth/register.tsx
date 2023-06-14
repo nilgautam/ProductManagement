@@ -41,7 +41,7 @@ const register = (props: any) => {
     } else {
       console.log('Hello Comp', props.componentId);
       let data = {
-        image: 'fdg',
+        image: image,
         name: name,
         surName: surName,
         email: email,
@@ -146,6 +146,7 @@ const register = (props: any) => {
       <CustomTextInput
         title="Birth Date"
         value={dob}
+        date
         keyboardType={'number-pad'}
         onChange={val => {
           setDob(val);

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import BaseSafeArea from '../../component/baseSafeArea/baseSafeArea';
 import CustomTextInput from '../../component/customeTextInput';
@@ -116,6 +116,7 @@ const profile = (props: any) => {
       <CustomTextInput
         title="Birth Date"
         value={dob}
+      date
         keyboardType={'number-pad'}
         onChange={val => {
           setDob(val);
@@ -126,6 +127,17 @@ const profile = (props: any) => {
         <CustomButton
           text="Continue"
           onPress={() => {
+            Alert.alert(
+              'Alert',
+              'Profile update successfully ',
+              [
+                {
+                  text: 'OK',
+                  onPress: () => Navigation.pop(props.componentId),
+                },
+              ],
+              {cancelable: false},
+            );
             var object = {
               profile: image,
               name: name,
@@ -135,14 +147,6 @@ const profile = (props: any) => {
               dob: dob,
             };
             AsyncStorage.storeData('user', object);
-            //   firebase.signUpFirebase(
-            //     email,
-            //     password,
-            //     name,
-            //     surName,
-            //     dob,
-            //     phoneNumber,
-            //   );
           }}
         />
       </View>

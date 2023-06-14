@@ -20,7 +20,7 @@ const signUpFirebase = (
   surName: string,
   dob: string,
   phoneNumber: string,
-  base64: object,
+  profile: object,
 ) => {
   auth()
     .createUserWithEmailAndPassword(email, pass)
@@ -37,11 +37,11 @@ const signUpFirebase = (
             surName,
             dob,
             phoneNumber,
-            base64,
+            profile,
           });
           Alert.alert(
             'Alert',
-            'Please verify your email',
+            'Please check your inbox on mail for verification ',
             [
               {
                 text: 'OK',
@@ -86,8 +86,31 @@ const loginFirebase = (email: string, pass: string) => {
         // Navigation add according to need
         // Navigation.setRoot({ root: { component: { name: 'Home' } } })
 
-        rootHome;
-       
+        Navigation.setRoot({
+          root: {
+            sideMenu: {
+              center: {
+                stack: {
+                  id: 'Home',
+                  children: [
+                    {
+                      component: {
+                        id: 'Home',
+                        name: 'Home',
+                      },
+                    },
+                  ],
+                },
+              },
+              left: {
+                component: {
+                  id: 'Drawer',
+                  name: 'Drawer',
+                },
+              },
+            },
+          },
+        });
       } else {
         Alert.alert('Error!', 'Email not verified');
       }
@@ -123,33 +146,32 @@ const signOut = () => {
     });
 };
 
-
-const rootHome=()=>{
-    Navigation.setRoot({
-        root: {
-          sideMenu: {
-            center: {
-              stack: {
-                id: 'Home',
-                children: [
-                  {
-                    component: {
-                      id: 'Home',
-                      name: 'Home',
-                    },
-                  },
-                ],
+const rootHome = () => {
+  Navigation.setRoot({
+    root: {
+      sideMenu: {
+        center: {
+          stack: {
+            id: 'Home',
+            children: [
+              {
+                component: {
+                  id: 'Home',
+                  name: 'Home',
+                },
               },
-            },
-            left: {
-              component: {
-                id: 'Drawer',
-                name: 'Drawer',
-              },
-            },
+            ],
           },
         },
-      });
-}
+        left: {
+          component: {
+            id: 'Drawer',
+            name: 'Drawer',
+          },
+        },
+      },
+    },
+  });
+};
 
-export default {app, signUpFirebase, loginFirebase, signOut,rootHome};
+export default {app, signUpFirebase, loginFirebase, signOut, rootHome};
